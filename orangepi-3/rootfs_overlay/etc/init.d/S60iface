@@ -3,3 +3,5 @@
 ifconfig eth0 up
 udhcpc -i eth0
 
+ifconfig wlan0 up
+#wpa_supplicant -B -c/etc/wpa_supplicant.conf -iwlan0
