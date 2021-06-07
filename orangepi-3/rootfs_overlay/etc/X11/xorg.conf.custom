@@ -10,15 +10,15 @@ Section "Monitor"
         Option       "DPMS"      "true"
 EndSection
 
-
 Section "Screen"
         Identifier "Screen0"
         Device     "FBDEV"
         Monitor    "Monitor0"
-#        DefaultColorDepth 16
-#        SubSection "Display"
-#                Depth     1
-#                Modes "1024x768" "800x600" "640x480"  "1600x1200" "1280x1024" "1280x960"
-#        EndSubSection
+EndSection
+
+Section "Module"
+	Load "fb"
+	Load "fbdevhw"
+	Load "shadow"
 EndSection
 
