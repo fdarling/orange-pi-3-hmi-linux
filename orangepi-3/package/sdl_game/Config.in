@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SDL_GAME
+        bool "sdl-game"
+        help
+          This is a simple game on SDL framework.
+
+          http://intemslab.ru/sdl-game-0.01.tar.gz
