@@ -7,6 +7,8 @@ BOARD_FILES_SRCS := $(shell find $(BOARD_DIR_NAME) -type f)
 BOARD_FILES_DSTS := $(patsubst %,$(BUILDROOT_DIR)/board/orangepi/%,$(BOARD_FILES_SRCS))
 BOARD_DIR_SRC = $(BOARD_DIR_NAME)
 BOARD_DIR_DST = $(BUILDROOT_DIR)/board/orangepi/orangepi-3
+GAME_PKG_SRC = $(BOARD_DIR_NAME)/package/sdl_game
+GAME_PKG_DST = $(BUILDROOT_DIR)/package/sdl-game
 FIRMWARE_DIR_SRC = firmware
 FIRMWARE_DIR_DST = $(BOARD_DIR_DST)/rootfs_overlay/lib/firmware/brcm
 FIRMWARE_AG_NAME = fw_bcm43456c5_ag.bin
@@ -24,6 +26,11 @@ all: $(DEFCONFIG_FILE_DST) $(BOARD_FILES_DSTS) $(FIRMWARE_AG_DST) $(FIRMWARE_BRC
 
 $(DEFCONFIG_FILE_DST): $(DEFCONFIG_FILE_SRC)
 	cp $(DEFCONFIG_FILE_SRC) $(DEFCONFIG_FILE_DST)
+
+$(GAME_PKG_DST): $(GAME_PKG_DST)
+	mkdir -p $(BUILDROOT_DIR)/package/sdl-game
+	cp -R $< $@
+	cp $(BOARD_DIR_NAME)/package/Config.in $(BUILDROOT_DIR)/package
 
 $(FIRMWARE_AG_DST): $(FIRMWARE_AG_SRC)
 	mkdir -p $(dir $@)
