@@ -1,0 +1,8 @@
+QT5_TEST_APP_VERSION = 0.01
+QT5_TEST_APP_SOURCE = qt5_test_app-$(SDL_GAME_VERSION).tar.gz
+QT5_TEST_APP_SITE = http://intemslab.ru
+QT5_TEST_APP_INSTALL_STAGING = YES
+QT5_TEST_APP_INSTALL_TARGET = YES
+QT5_TEST_APP_DEPENDENCIES = qt5 host-pkgconf
+
+$(eval $(cmake-package))

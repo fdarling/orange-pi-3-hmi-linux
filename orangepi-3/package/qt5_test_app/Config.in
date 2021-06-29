@@ -1,0 +1,6 @@
+config BR2_PACKAGE_QT5_TEST_APP
+        bool "qt5_test_app"
+        help
+          This is a simple game on SDL framework.
+
+          http://intemslab.ru/sdl-game-0.01.tar.gz
