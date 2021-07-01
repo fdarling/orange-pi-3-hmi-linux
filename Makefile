@@ -8,7 +8,9 @@ BOARD_FILES_DSTS := $(patsubst %,$(BUILDROOT_DIR)/board/orangepi/%,$(BOARD_FILES
 BOARD_DIR_SRC = $(BOARD_DIR_NAME)
 BOARD_DIR_DST = $(BUILDROOT_DIR)/board/orangepi/orangepi-3
 GAME_PKG_SRC = $(BOARD_DIR_NAME)/package/sdl_game
-GAME_PKG_DST = $(BUILDROOT_DIR)/package/sdl-game
+GAME_PKG_DST = $(BUILDROOT_DIR)/package/qt5_test_app
+QT5_APP_PKG_SRC = $(BOARD_DIR_NAME)/package/qt5_test_app
+QT5_APP_PKG_DST = $(BUILDROOT_DIR)/package/sdl-game
 FIRMWARE_DIR_SRC = firmware
 FIRMWARE_DIR_DST = $(BOARD_DIR_DST)/rootfs_overlay/lib/firmware/brcm
 FIRMWARE_AG_NAME = fw_bcm43456c5_ag.bin
@@ -20,7 +22,7 @@ FIRMWARE_BRCM_NAMES = \
 	brcmfmac43456-sdio.txt
 FIRMWARE_BRCM_DSTS = $(patsubst %,$(FIRMWARE_DIR_DST)/%,$(FIRMWARE_BRCM_NAMES))
 
-all: $(DEFCONFIG_FILE_DST) $(BOARD_FILES_DSTS) $(FIRMWARE_AG_DST) $(FIRMWARE_BRCM_DSTS) $(GAME_PKG_DST)
+all: $(DEFCONFIG_FILE_DST) $(BOARD_FILES_DSTS) $(FIRMWARE_AG_DST) $(FIRMWARE_BRCM_DSTS) $(GAME_PKG_DST) $(QT5_APP_PKG_DST)
 	make -C $(BUILDROOT_DIR) $(DEFCONFIG_NAME)
 	make -C $(BUILDROOT_DIR)
 
@@ -30,6 +32,10 @@ $(DEFCONFIG_FILE_DST): $(DEFCONFIG_FILE_SRC)
 $(GAME_PKG_DST): $(GAME_PKG_SRC)
 	cp -r $< $@
 	cp $(BOARD_DIR_NAME)/package/Config.in $(BUILDROOT_DIR)/package
+
+$(QT5_APP_PKG_DST): $(QT5_APP_PKG_SRC)
+	cp -r $< $@
+#	cp $(BOARD_DIR_NAME)/package/Config.in $(BUILDROOT_DIR)/package
 
 $(FIRMWARE_AG_DST): $(FIRMWARE_AG_SRC)
 	mkdir -p $(dir $@)
@@ -47,5 +53,6 @@ clean:
 	rm -f $(DEFCONFIG_FILE_DST)
 	rm -rf $(BOARD_DIR_DST)
 	rm -rf $(GAME_PKG_DST)
+	rm -rf $(QT5_APP_PKG_DST)
 
 .PHONY: all clean
